@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load filters %}
+
+{% block 'body' %}
+
+<h1 align="center">VENDA DE PRODUTOS RECICLÁVEIS</h1>
+<br>
+
+<form class="container">
+
+    <div class="listar_produtos">
+            
+        <div class="row">
+            {% for produto in produtos %}
+                <div class="col-md">
+                    <div style="background-color: #0f0f0f; width:18rem" class="card";>
+                        {% if produto|get_first_image %}
+                            <img width="100%" class="card-img-top" src="{{produto|get_first_image}}">
+                        {% endif %}
+                            <div class="card-body"><div><h5 class="card-title">{{produto.nome}} </h5></div>
+                                <div><span  class="badge badge-info">Valor kg.</span>
+                                    <span inputmode="text">R${{produto.preco_venda}}0</span>
+                                </div>
+                                <div align="right"><br>
+                                    <span class="badge badge-info"> <a href="{% url 'vender' produto.slug %}" class="btn btn-primary">VENDER</a></span>
+                                </div>
+                                <br>
+                               
+                            </div>
+                    </div>                     
+                    <br>
+                </div>
+                <br>  
+            {% endfor %}
+            
+         </div>
+    </div>
+
+</form>
+
+{% endblock %}
